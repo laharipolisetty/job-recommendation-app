@@ -1,7 +1,16 @@
 import PyPDF2
 import spacy
+from functools import lru_cache
+from spacy.cli import download
 
-nlp = spacy.load("en_core_web_sm")
+# ✅ Lazy-load spaCy model with caching
+@lru_cache()
+def get_nlp():
+    try:
+        return spacy.load("en_core_web_sm")
+    except OSError:
+        download("en_core_web_sm")
+        return spacy.load("en_core_web_sm")
 
 def extract_text_from_pdf(file):
     pdf_reader = PyPDF2.PdfReader(file)
@@ -11,6 +20,7 @@ def extract_text_from_pdf(file):
     return text
 
 def extract_skills_experience(text):
+    nlp = get_nlp()
     doc = nlp(text)
     skills = []
     experience = []
