@@ -1,5 +1,8 @@
 streamlit
-sqlite3
+pandas
+openai
+langchain
+faiss-cpu
+tqdm
+python-dotenv
 PyPDF2
-spacy
-lottie
