@@ -6,3 +6,6 @@ faiss-cpu
 tqdm
 python-dotenv
 PyPDF2
+spacy
+sqlite-utils
+
